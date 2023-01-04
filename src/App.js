@@ -1,7 +1,9 @@
-import './App.css';
 import { useState } from "react";
 import { Button, Container, Nav, Navbar, Row, Col } from 'react-bootstrap';
+import { Routes, Route, Link} from 'react-router-dom';
+import './App.css';
 import data from './data';
+import Detail from './routes/Detail';
 
 function App() {
 
@@ -14,24 +16,31 @@ function App() {
         <Container>
           <Navbar.Brand href="#home">Brand</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
+            <Link className="nav-link" to="/">Home</Link>
+            <Nav.Link href="/detail">detail</Nav.Link>
             <Nav.Link href="#features">Features</Nav.Link>
             <Nav.Link href="#pricing">Pricing</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
 
-      <div className="main-bg"></div>
-
-      <Container>
-        <Row>
-          { shoes.map((item, i)=>{
-              return (
-                <Product item={item} i={i+1} />
-              )
-          })}
-        </Row>
-      </Container>
+      <Routes>
+        <Route path="/" element={
+          <>
+            <div className="main-bg"></div>
+            <Container>
+              <Row>
+                { shoes.map((item, i)=>{
+                    return (
+                      <Product item={item} i={i+1} />
+                    )
+                })}
+              </Row>
+            </Container>
+          </>
+        } />
+        <Route path="/detail" element={ <Detail /> } />
+      </Routes>
       
     </div>
   );
@@ -46,5 +55,6 @@ function Product(props) {
     </Col>
   )
 }
+
 
 export default App;
