@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button, Container, Nav, Navbar, Row, Col } from 'react-bootstrap';
-import { Routes, Route, Link} from 'react-router-dom';
+import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom';
 import './App.css';
 import data from './data';
 import Detail from './routes/Detail';
@@ -8,6 +8,7 @@ import Detail from './routes/Detail';
 function App() {
 
   let [shoes] = useState(data);
+  let navigate = useNavigate();
 
   return (
     <div className="App">
@@ -17,8 +18,7 @@ function App() {
           <Navbar.Brand href="#home">Brand</Navbar.Brand>
           <Nav className="me-auto">
             <Link className="nav-link" to="/">Home</Link>
-            <Nav.Link href="/detail">detail</Nav.Link>
-            <Nav.Link href="#features">Features</Nav.Link>
+            <Nav.Link onClick={()=>{navigate('/detail')}}>detail</Nav.Link>
             <Nav.Link href="#pricing">Pricing</Nav.Link>
           </Nav>
         </Container>
@@ -39,11 +39,25 @@ function App() {
             </Container>
           </>
         } />
-        <Route path="/detail" element={ <Detail /> } />
+        <Route path="/detail/:id" element={ <Detail shoes={shoes} /> } />
+        <Route path="/about" element={ <About /> }>
+          <Route path="member" element={ <div>this is member</div> } />
+          <Route path="location" element={ <div>this is location</div> } />
+        </Route>
+        <Route path="*" element={<div>404 Page</div>} />
       </Routes>
       
     </div>
   );
+}
+
+function About() {
+  return (
+    <div>
+      <h4>회사정보임</h4>
+      <Outlet></Outlet>
+    </div>
+  )
 }
 
 function Product(props) {

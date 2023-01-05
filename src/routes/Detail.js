@@ -1,16 +1,21 @@
 import { Container, Row, Col } from 'react-bootstrap';
+import { useParams } from 'react-router-dom';
 
 function Detail(props) {
+
+    let {id} = useParams();
+    console.log(id);
+
     return (
-      <Container>
+      <Container key={props.shoes[id].id}>
         <Row>
           <Col sm>
-            <img src="https://codingapple1.github.io/shop/shoes1.jpg" width="100%" />
+            <img src={process.env.PUBLIC_URL + 'img/shoes'+id+'.jpg'} width="100%" />
           </Col>
           <Col sm>
-            <h4>상품명</h4>
-            <p>상품설명</p>
-            <p>120000원</p>
+            <h4>{props.shoes[id].title}</h4>
+            <p>{props.shoes[id].content}</p>
+            <p>{props.shoes[id].price}</p>
             <button className="btn btn-danger">주문하기</button> 
           </Col>
         </Row>
