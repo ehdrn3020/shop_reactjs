@@ -32,7 +32,10 @@ function App() {
               <Row>
                 { shoes.map((item, i)=>{
                     return (
-                      <Product item={item} i={i+1} />
+                      <Product 
+                        item={item} 
+                        i={i+1} 
+                      />
                     )
                 })}
               </Row>
@@ -63,7 +66,9 @@ function About() {
 function Product(props) {
   return (
     <Col sm key={props.item.id}>
-      <img src={process.env.PUBLIC_URL + 'img/shoes'+props.i+'.jpg'} width="90%"></img>
+      <a href={`detail/${props.item.id}`}>
+        <img src={process.env.PUBLIC_URL + 'img/shoes'+props.i+'.jpg'} width="90%"></img>
+      </a>
       <h4>{props.item.title}</h4>
       <p>{props.item.price}</p>
     </Col>

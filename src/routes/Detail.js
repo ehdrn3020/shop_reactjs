@@ -4,23 +4,27 @@ import { useParams } from 'react-router-dom';
 function Detail(props) {
 
     let {id} = useParams();
-    console.log(id);
+    // props순서에 관계없이 id값으로 find
+    let target_id = props.shoes.find( x=> x.id==id );
 
     return (
-      <Container key={props.shoes[id].id}>
-        <Row>
+      <Container>
+      {
+        target_id === undefined ? <div>404 Not Found</div> :
+          <Row>
           <Col sm>
-            <img src={process.env.PUBLIC_URL + 'img/shoes'+id+'.jpg'} width="100%" />
+            <img src="https://codingapple1.github.io/shop/shoes1.jpg" width="100%" />
           </Col>
           <Col sm>
-            <h4>{props.shoes[id].title}</h4>
-            <p>{props.shoes[id].content}</p>
-            <p>{props.shoes[id].price}</p>
+            <h4>{target_id.title}</h4>
+            <p>{target_id.content}</p>
+            <p>{target_id.price}</p>
             <button className="btn btn-danger">주문하기</button> 
           </Col>
-        </Row>
+          </Row>
+      }
       </Container>
-    )
+    );
   }
 
 export default Detail
