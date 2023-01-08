@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Container, Nav, Navbar, Row, Col } from 'react-bootstrap';
 import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom';
 import './App.css';
@@ -32,7 +32,8 @@ function App() {
               <Row>
                 { shoes.map((item, i)=>{
                     return (
-                      <Product 
+                        <Product 
+                        key={i}
                         item={item} 
                         i={i+1} 
                       />
@@ -65,7 +66,7 @@ function About() {
 
 function Product(props) {
   return (
-    <Col sm key={props.item.id}>
+    <Col sm>
       <a href={`detail/${props.item.id}`}>
         <img src={process.env.PUBLIC_URL + 'img/shoes'+props.i+'.jpg'} width="90%"></img>
       </a>
