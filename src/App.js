@@ -1,13 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button, Container, Nav, Navbar, Row, Col } from 'react-bootstrap';
 import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom';
+import axios from 'axios';
 import './App.css';
 import data from './data';
 import Detail from './routes/Detail';
 
 function App() {
 
-  let [shoes] = useState(data);
+  let [shoes, setShoes] = useState(data);
   let navigate = useNavigate();
 
   return (
@@ -41,6 +42,18 @@ function App() {
                 })}
               </Row>
             </Container>
+            <Button onClick={()=>{
+              axios.get('https://codingapple1.github.io/shop/data2.json')
+              .then((data)=>{ 
+                const response = data.data;
+                let copy = [...shoes, ...response];
+                setShoes(copy);
+              })
+              .catch(()=>{
+                console.log('Request Fail!')
+              })
+ 
+            }}>더보기</Button>
           </>
         } />
         <Route path="/detail/:id" element={ <Detail shoes={shoes} /> } />
@@ -58,7 +71,7 @@ function App() {
 function About() {
   return (
     <div>
-      <h4>회사정보임</h4>
+      <h4>회사정보</h4>
       <Outlet></Outlet>
     </div>
   )
@@ -66,7 +79,7 @@ function About() {
 
 function Product(props) {
   return (
-    <Col sm>
+    <Col xs={12} md={4}>
       <a href={`detail/${props.item.id}`}>
         <img src={process.env.PUBLIC_URL + 'img/shoes'+props.i+'.jpg'} width="90%"></img>
       </a>
@@ -75,6 +88,5 @@ function Product(props) {
     </Col>
   )
 }
-
 
 export default App;
