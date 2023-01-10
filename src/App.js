@@ -9,6 +9,7 @@ import Detail from './routes/Detail';
 function App() {
 
   let [shoes, setShoes] = useState(data);
+  let [more, setMore] = useState(2);
   let navigate = useNavigate();
 
   return (
@@ -42,18 +43,26 @@ function App() {
                 })}
               </Row>
             </Container>
-            <Button onClick={()=>{
-              axios.get('https://codingapple1.github.io/shop/data2.json')
-              .then((data)=>{ 
-                const response = data.data;
-                let copy = [...shoes, ...response];
-                setShoes(copy);
-              })
-              .catch(()=>{
-                console.log('Request Fail!')
-              })
- 
-            }}>더보기</Button>
+            { more <= 3 ?
+              <Button onClick={()=>{
+                axios.get('https://codingapple1.github.io/shop/data'+more+'.json')
+                .then((data)=>{ 
+                  const response = data.data;
+                  let copy = [...shoes, ...response];
+                  setShoes(copy);
+                  setMore(more+1)
+                })
+                .catch(()=>{
+                  console.log('Request Fail!')
+                })
+  
+              }}>더보기</Button>
+              : 
+              <Button onClick={()=>{
+                setShoes(data);
+                setMore(2)
+              }}>접기</Button>
+            }
           </>
         } />
         <Route path="/detail/:id" element={ <Detail shoes={shoes} /> } />
