@@ -20,7 +20,7 @@ function App() {
           <Navbar.Brand href="#home">Brand</Navbar.Brand>
           <Nav className="me-auto">
             <Link className="nav-link" to="/">Home</Link>
-            <Nav.Link onClick={()=>{navigate('/detail')}}>detail</Nav.Link>
+            <Nav.Link onClick={()=>{navigate('/about')}}>About</Nav.Link>
             <Nav.Link href="#pricing">Pricing</Nav.Link>
           </Nav>
         </Container>
