@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 function Detail(props) {
 
     let {id} = useParams();
+    const img_id = parseInt(id)+1;
     // props순서에 관계없이 id값으로 find
     let target_id = props.shoes.find( x=> x.id==id );
     let [alert, setAlert] = useState(true);
@@ -27,7 +28,7 @@ function Detail(props) {
           target_id === undefined ? <div>404 Not Found</div> :
             <Row>
             <Col sm>
-              <img src="https://codingapple1.github.io/shop/shoes1.jpg" width="100%" />
+              <img src={`../img/shoes${img_id}.jpg`} width="100%" />
             </Col>
             <Col sm>
               <h4>{target_id.title}</h4>

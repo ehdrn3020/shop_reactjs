@@ -89,9 +89,9 @@ function About() {
 function Product(props) {
   return (
     <Col xs={12} md={4}>
-      <a href={`detail/${props.item.id}`}>
+      <Link to={`detail/${props.item.id}`}>
         <img src={process.env.PUBLIC_URL + 'img/shoes'+props.i+'.jpg'} width="90%"></img>
-      </a>
+      </Link>
       <h4>{props.item.title}</h4>
       <p>{props.item.price}</p>
     </Col>
