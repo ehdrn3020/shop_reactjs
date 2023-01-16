@@ -9,20 +9,25 @@ function Detail(props) {
     // props순서에 관계없이 id값으로 find
     let target_id = props.shoes.find( x=> x.id==id );
     let [alert, setAlert] = useState(true);
+    let [alertFade, setAlertFade] = useState('');
     let [tab, setTab] = useState(1);
 
 
 
     useEffect(()=>{
+      setTimeout(()=>{setAlertFade('end')},300);
       let time = setTimeout(()=>{ setAlert(false) }, 2000);
-      return ()=>{ clearTimeout(time) }
+      return ()=>{ 
+        clearTimeout(time) 
+        setAlertFade('')
+      }
     }, []);
 
     return (
       <Container>
         {
           alert == true ?
-          <div className="alert alert-warning">
+          <div className={`alert alert-warning ${alertFade}`}>
             2초 이내 구매시 할인
           </div>
           : null
@@ -58,13 +63,18 @@ function Detail(props) {
   }
 
   function TabContent({tab}) {
-    if (tab == 1){
-      return <div>내용1</div>
-    } else if (tab == 2){
-      return <div>내용2</div>
-    } else if (tab == 3){
-      return <div>내용3</div>
-    }
+    
+    let [fade, setFade] = useState('')
+    useEffect(()=>{
+      setTimeout(()=>{setFade('end')},300);
+      return ()=>{setFade('')}
+    },[tab])
+
+    return (
+      <div className={`start ${fade}`}>
+        { [<div>내용1</div>,<div>내용2</div>,<div>내용3</div>][tab-1] }
+      </div>
+    )
   }
   
 
