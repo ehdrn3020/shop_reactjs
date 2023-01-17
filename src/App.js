@@ -5,6 +5,7 @@ import axios from 'axios';
 import './App.css';
 import data from './data';
 import Detail from './routes/Detail';
+import Cart from './routes/Cart';
 
 function App() {
 
@@ -17,11 +18,11 @@ function App() {
 
       <Navbar bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand href="#home">Brand</Navbar.Brand>
+          <Navbar.Brand onClick={()=>{navigate('/')}}>Brand</Navbar.Brand>
           <Nav className="me-auto">
             <Link className="nav-link" to="/">Home</Link>
             <Nav.Link onClick={()=>{navigate('/about')}}>About</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
+            <Nav.Link onClick={()=>{navigate('/cart')}}>Cart</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
@@ -66,6 +67,7 @@ function App() {
           </>
         } />
         <Route path="/detail/:id" element={ <Detail shoes={shoes} /> } />
+        <Route path="/cart" element={ <Cart /> } />
         <Route path="/about" element={ <About /> }>
           <Route path="member" element={ <div>this is member</div> } />
           <Route path="location" element={ <div>this is location</div> } />
