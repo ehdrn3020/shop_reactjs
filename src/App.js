@@ -3,7 +3,7 @@ import { Button, Container, Nav, Navbar, Row, Col } from 'react-bootstrap';
 import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom';
 import axios from 'axios';
 import './App.css';
-import data from './data';
+import data from './datas/item';
 import Detail from './routes/Detail';
 import Cart from './routes/Cart';
 
