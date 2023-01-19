@@ -1,10 +1,6 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit'
+import user_val from './stores/userSlice';
 import wishlist from './datas/wishlist';
-
-let user_val = createSlice({
-  name: 'user',
-  initialState : 'kang'
-})
 
 let stock_val = createSlice({
   name: 'stock',
