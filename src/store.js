@@ -16,11 +16,25 @@ let wishlist_val = createSlice({
       state[num].count++;
     },
     addItem(state, action){
-      state.push(action.payload);
-    }
+      // Check Already Cart
+      let item = state.findIndex((item)=>{ return item.id == action.payload.id})
+      if(item >= 0){
+        state[item].count++;
+      } else {
+        state.push(action.payload);
+      }
+    },
+    subCount(state, action){
+      let num = state.findIndex((item)=> { return item.id == action.payload});
+      if(state[num].count <= 1) { 
+        state.splice(num,1); 
+      } else {
+        state[num].count--;
+      }
+    },
   }
 })
-export let { addCount, addItem } = wishlist_val.actions;
+export let { addCount, addItem, subCount } = wishlist_val.actions;
 
 export default configureStore({
   reducer: { 
