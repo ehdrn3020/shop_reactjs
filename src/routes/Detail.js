@@ -1,6 +1,8 @@
 import { Container, Row, Col, Nav } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { addItem } from '../store'
 
 function Detail(props) {
 
@@ -12,7 +14,7 @@ function Detail(props) {
     let [alertFade, setAlertFade] = useState('');
     let [tab, setTab] = useState(1);
 
-
+    let dispatch = useDispatch()
 
     useEffect(()=>{
       setTimeout(()=>{setAlertFade('end')},300);
@@ -42,7 +44,9 @@ function Detail(props) {
               <h4>{target_id.title}</h4>
               <p>{target_id.content}</p>
               <p>{target_id.price}</p>
-              <button className="btn btn-danger">주문하기</button> 
+              <button className="btn btn-danger" onClick={()=>{
+                dispatch(addItem({id: target_id.id, name : target_id.title, count : 1}));
+              }}>주문하기</button> 
             </Col>
             </Row>
         }

@@ -9,8 +9,18 @@ let stock_val = createSlice({
 
 let wishlist_val = createSlice({
   name: 'wishlist',
-  initialState : wishlist
+  initialState : wishlist,
+  reducers: {
+    addCount(state, action){
+      let num = state.findIndex((item)=> { return item.id == action.payload});
+      state[num].count++;
+    },
+    addItem(state, action){
+      state.push(action.payload);
+    }
+  }
 })
+export let { addCount, addItem } = wishlist_val.actions;
 
 export default configureStore({
   reducer: { 
