@@ -11,8 +11,6 @@ function Cart() {
 
     return (
         <div>
-            { user.name } 의 장바구니
-
             <Table striped>
                 <thead>
                     <tr>

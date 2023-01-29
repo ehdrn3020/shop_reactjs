@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button, Container, Nav, Navbar, Row, Col } from 'react-bootstrap';
 import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom';
+import { useQuery } from 'react-query'
 import axios from 'axios';
 import './App.css';
 import data from './datas/item';
@@ -13,6 +14,17 @@ function App() {
   let [more, setMore] = useState(2);
   let navigate = useNavigate();
 
+  // react query
+  let callUser = useQuery('callUser', () => {
+    return axios.get('https://codingapple1.github.io/userdata.json').then(
+      (a) => {
+        return a.data
+      }),
+      { staleTime: 10000 }
+  });
+
+  console.log(callUser);
+  
   return (
     <div className="App">
 
@@ -23,6 +35,11 @@ function App() {
             <Link className="nav-link" to="/">Home</Link>
             <Nav.Link onClick={()=>{navigate('/about')}}>About</Nav.Link>
             <Nav.Link onClick={()=>{navigate('/cart')}}>Cart</Nav.Link>
+          </Nav> 
+          <Nav style={{color:'white'}}>
+            { callUser.isLoading && 'Loading' }
+            { callUser.error && 'Error' }
+            { callUser.data && '반가워요,'+callUser.data.name }  
           </Nav>
         </Container>
       </Navbar>

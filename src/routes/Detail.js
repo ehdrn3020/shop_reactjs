@@ -26,7 +26,7 @@ function Detail(props) {
         setAlertFade('')
       }
     }, []);
-
+    
     useEffect(()=>{
       setBuyFade('end');
       let time = setTimeout(()=>{ setBuy(false) }, 2000);
@@ -48,7 +48,7 @@ function Detail(props) {
         {
           buy == true ?
           <div className={`alert alert-warning ${buyFade}`}>
-            주문완료
+            Cart 추가완료
           </div>
           : null
         }
