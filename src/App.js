@@ -108,7 +108,7 @@ function Product(props) {
   return (
     <Col xs={12} md={4}>
       <Link to={`detail/${props.item.id}`}>
-        <img src={process.env.PUBLIC_URL + 'img/shoes'+props.i+'.jpg'} width="90%"></img>
+        <img src={process.env.PUBLIC_URL + '/img/shoes'+props.i+'.jpg'} width="90%"></img>
       </Link>
       <h4>{props.item.title}</h4>
       <p>{props.item.price}</p>
