@@ -14,17 +14,17 @@ function App() {
   let [more, setMore] = useState(2);
   let navigate = useNavigate();
 
-  // react query
+  /* react query example */
   let callUser = useQuery('callUser', () => {
     return axios.get('https://codingapple1.github.io/userdata.json').then(
       (a) => {
+        console.log(a.data);
         return a.data
       }),
-      { staleTime: 10000 }
+      { staleTime: 1000000 }
   });
-
-  console.log(callUser);
   
+
   return (
     <div className="App">
 
@@ -39,7 +39,7 @@ function App() {
           <Nav style={{color:'white'}}>
             { callUser.isLoading && 'Loading' }
             { callUser.error && 'Error' }
-            { callUser.data && '반가워요,'+callUser.data.name }  
+            { callUser.data && '반가워요' }  
           </Nav>
         </Container>
       </Navbar>

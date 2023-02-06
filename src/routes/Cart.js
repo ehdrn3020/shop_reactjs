@@ -1,3 +1,4 @@
+import { memo, useState } from 'react'
 import { Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeName, increase } from './../stores/userSlice';
@@ -8,6 +9,7 @@ function Cart() {
     let user = useSelector((state)=>{return state.user})
     let list = useSelector((state)=>{return state.wishlist})
     let dispatch = useDispatch()
+    let [count, setCount] = useState(0)
 
     return (
         <div>
