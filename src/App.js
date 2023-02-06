@@ -18,10 +18,9 @@ function App() {
   let callUser = useQuery('callUser', () => {
     return axios.get('https://codingapple1.github.io/userdata.json').then(
       (a) => {
-        console.log(a.data);
         return a.data
       }),
-      { staleTime: 1000000 }
+      { staleTime: 10000000 }
   });
   
 
